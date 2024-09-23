@@ -29,6 +29,8 @@ export const createTask = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
+  console.log("createTask called"); // TODO: remove console.log()
+
   try {
     const {
       title,
