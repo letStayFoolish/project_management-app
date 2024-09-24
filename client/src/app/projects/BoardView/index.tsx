@@ -12,7 +12,12 @@ import LoadingDots from "@/components/Loader";
 import Error from "@/components/ErrorComponent";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { EllipsisVerticalIcon, MessageSquareMore, Plus } from "lucide-react";
+import {
+  EllipsisVertical,
+  EllipsisVerticalIcon,
+  MessageSquareMore,
+  Plus,
+} from "lucide-react";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -76,6 +81,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item: { id: number }) => moveTask(item.id, status),
+    // eslint-disable-next-line
     collect: (monitor: any) => ({
       isOver: !!monitor.isOver(),
     }),
@@ -89,7 +95,6 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
     [STATUS.UnderReview]: "#D97706",
     [STATUS.Completed]: "#000000",
   };
-
   return (
     <div
       ref={(instance) => {
@@ -98,7 +103,6 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
       className={`sl:py-4 rounded-lg py-2 xl:px-2 ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""}`}
     >
       <div className="mb-3 flex w-full">
-        {/* !important tag in tailwindCss*/}
         <div
           className={`w-2 !bg-[${statusColor[status]}] rounded-s-lg`}
           style={{ backgroundColor: statusColor[status] }}
@@ -107,7 +111,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
           <h3 className="flex items-center text-lg font-semibold dark:text-white">
             {status}{" "}
             <span
-              className="ml-2 inline-block rounded-full bg-gray-200 p-1.5 text-center text-sm leading-none dark:bg-dark-tertiary"
+              className="ml-2 inline-block rounded-full bg-gray-200 p-1 text-center text-sm leading-none dark:bg-dark-tertiary"
               style={{ width: "1.5rem", height: "1.5rem" }}
             >
               {tasksCount}
@@ -115,7 +119,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
           </h3>
           <div className="flex items-center gap-1">
             <button className="flex h-6 w-5 items-center justify-center dark:text-neutral-500">
-              <EllipsisVerticalIcon size={26} />
+              <EllipsisVertical size={26} />
             </button>
             <button
               className="flex h-6 w-6 items-center justify-center rounded bg-gray-200 dark:bg-dark-tertiary dark:text-white"
@@ -126,6 +130,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({
           </div>
         </div>
       </div>
+
       {tasks
         .filter((task) => task.status === status)
         .map((task) => (
@@ -143,6 +148,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "task",
     item: { id: task.id },
+    // eslint-disable-next-line
     collect: (monitor: any) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -159,6 +165,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     : "";
 
   const numberOfComments = task.comments ? task.comments.length : 0;
+
+  const handleDrag = (instance: any) => {
+    drag(instance);
+  };
 
   const PriorityTag: React.FC<{ priority: PriorityType }> = ({ priority }) => {
     return (
@@ -182,7 +192,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   return (
     <div
-      ref={(instance) => drag(instance)}
+      ref={handleDrag}
       className={`mb-4 cursor-grab rounded-md bg-white shadow dark:bg-dark-secondary ${isDragging ? "opacity-50" : "opacity-100"}`}
     >
       {task.attachments && task.attachments.length > 0 && (
