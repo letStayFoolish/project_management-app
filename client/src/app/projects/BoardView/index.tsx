@@ -166,6 +166,7 @@ const Task: React.FC<TaskProps> = ({ task }) => {
 
   const numberOfComments = task.comments ? task.comments.length : 0;
 
+  // eslint-disable-next-line
   const handleDrag = (instance: any) => {
     drag(instance);
   };

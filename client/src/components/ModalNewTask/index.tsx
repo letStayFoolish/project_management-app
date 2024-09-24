@@ -93,7 +93,7 @@ const ModalNewTask: React.FC<Props> = ({ isOpen, onClose, id }) => {
 
       await createTask(newTaskBody);
 
-      // console.log(newTaskFormSchema.safeParse(newTaskBody));
+      // eslint-disable-next-line
     } catch (error: any) {
       console.error(error);
       setError("root", {

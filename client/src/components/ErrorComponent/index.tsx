@@ -5,9 +5,10 @@ interface ErrorProps extends React.HTMLProps<HTMLDivElement> {
   text?: string;
 }
 
-const Error: React.FC<ErrorProps> = ({
-  text = "An error occurred while fetching data.",
-}) => {
+const Error: React.FC<ErrorProps> = (
+  { text = "An error occurred while fetching data." },
+  props,
+) => {
   return (
     <div
       {...props}

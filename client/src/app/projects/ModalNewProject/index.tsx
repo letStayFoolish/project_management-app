@@ -65,6 +65,7 @@ const ModalNewProject: React.FC<Props> = ({ isOpen, onClose }) => {
     try {
       await createProject(body);
       console.log(newProjectSchema.safeParse(body));
+      // eslint-disable-next-line
     } catch (error: any) {
       console.error(error);
       form.setError("root", {
