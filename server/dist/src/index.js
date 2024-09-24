@@ -12,6 +12,9 @@ const cors_1 = __importDefault(require("cors"));
 /* ROUTE IMPORTS */
 const projectsRoute_1 = __importDefault(require("./routes/projectsRoute"));
 const tasksRoute_1 = __importDefault(require("./routes/tasksRoute"));
+const searchRoute_1 = __importDefault(require("./routes/searchRoute"));
+const teamsRoute_1 = __importDefault(require("./routes/teamsRoute"));
+const usersRoute_1 = __importDefault(require("./routes/usersRoute"));
 /* CONFIGURATIONS */
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -28,6 +31,9 @@ app.get("/", (req, res) => {
 });
 app.use("/projects", projectsRoute_1.default);
 app.use("/tasks", tasksRoute_1.default);
+app.use("/search", searchRoute_1.default);
+app.use("/teams", teamsRoute_1.default);
+app.use("/users", usersRoute_1.default);
 /* SERVER */
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

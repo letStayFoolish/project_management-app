@@ -8,6 +8,9 @@ import cors from "cors";
 /* ROUTE IMPORTS */
 import projectRoutes from "./routes/projectsRoute";
 import taskRoutes from "./routes/tasksRoute";
+import searchRoutes from "./routes/searchRoute";
+import teamRoutes from "./routes/teamsRoute";
+import userRoute from "./routes/usersRoute";
 /* CONFIGURATIONS */
 dotenv.config();
 const app = express();
@@ -26,6 +29,9 @@ app.get("/", (req, res) => {
 
 app.use("/projects", projectRoutes);
 app.use("/tasks", taskRoutes);
+app.use("/search", searchRoutes);
+app.use("/teams", teamRoutes);
+app.use("/users", userRoute);
 
 /* SERVER */
 const port = process.env.PORT || 3000;
